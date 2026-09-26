@@ -1,3 +1,15 @@
+const GA_MEASUREMENT_ID='G-70B346T2ZZ';
+(function initAnalytics(){
+  if(document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"]`)) return;
+  const s=document.createElement('script');
+  s.async=true;
+  s.src='https://www.googletagmanager.com/gtag/js?id='+GA_MEASUREMENT_ID;
+  document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=window.gtag||function(){dataLayer.push(arguments)};
+  gtag('js',new Date());
+  gtag('config',GA_MEASUREMENT_ID);
+})();
 const esc=s=>String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[m]));
 const NAV=[['/','Início'],['/events.html','Eventos'],['/fighters.html','Lutadores'],['/stats.html','Estatísticas'],['/news.html','Notícias'],['/stats.html','Ranqueamentos'],['/pro.html','PRO']];
 function initNav(){const nav=document.querySelector('.nav');if(!nav)return;const until=Number(localStorage.getItem('FZ_PRO_UNTIL')||0),pro=until>Date.now();nav.innerHTML=`<a class="brand" href="/"><span class="crown">♛</span>FIGHT<span>ZONE</span></a><button class="menu-btn" aria-label="Menu">☰</button><nav class="links">${NAV.map(([u,n])=>`<a class="${location.pathname===u?'active':''}" href="${u}">${n}</a>`).join('')}</nav><form class="top-search" action="/fighters.html"><input name="q" placeholder="Buscar luta, atleta..."><button>⌕</button></form><a class="account-btn" href="/pro.html">${pro?'👑 PRO ativo':'Minha conta'}</a>`;nav.querySelector('.menu-btn').onclick=()=>nav.querySelector('.links').classList.toggle('open')}
