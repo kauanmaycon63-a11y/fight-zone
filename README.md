@@ -11,4 +11,4 @@ Site brasileiro sobre MMA e UFC.
 - Contato, Sobre e Privacidade
 - Sitemap e robots.txt para SEO
 
-Hospedagem planejada: Vercel.
+Hospedagem: Vercel com deploy automático via GitHub.
