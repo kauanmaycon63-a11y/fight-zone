@@ -3,9 +3,10 @@
 Site brasileiro sobre MMA e UFC.
 
 ## Estrutura
-- Página inicial moderna e responsiva
-- Notícias e 10 matérias especiais
-- Páginas de Eventos, Lutadores e Estatísticas
+- Notícias atualizadas automaticamente
+- Lutadores com fotos e categorias
+- Eventos e rankings
+- 10 matérias especiais
 - Fight Zone PRO
 - Área para anunciantes
 - Contato, Sobre e Privacidade
