@@ -8,4 +8,11 @@
   s.async=true;
   s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(id);
   document.head.appendChild(s);
+
+  if(!document.querySelector('script[src="/_vercel/insights/script.js"]')){
+    var v=document.createElement('script');
+    v.defer=true;
+    v.src='/_vercel/insights/script.js';
+    document.head.appendChild(v);
+  }
 })();
