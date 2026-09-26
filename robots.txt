@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fight-zone-seven.vercel.app/sitemap.xml
