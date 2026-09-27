@@ -1,7 +1,7 @@
 const STORE_PRODUCTS={
-  guia:{name:'Guia Fight Zone · MMA sem enrolação',price:'R$ 9,90'},
-  pack:{name:'Pack Fight Night',price:'R$ 14,90'},
-  combo:{name:'Combo PRO + Pack Fight Night',price:'R$ 19,90'}
+  guia:{name:'Guia Fight Zone · MMA sem enrolação',price:'R$ 4,90'},
+  pack:{name:'Pack Fight Night',price:'R$ 7,90'},
+  combo:{name:'Combo PRO + Pack Fight Night',price:'R$ 10,90'}
 };
 
 function getReceipts(){try{return JSON.parse(localStorage.getItem('FZ_STORE_RECEIPTS')||'{}')}catch(e){return {}}}
@@ -13,7 +13,7 @@ function initStore(){
     btn.addEventListener('click',async()=>{
       const product=btn.dataset.buy;
       if(!STORE_PRODUCTS[product])return;
-      const value={guia:9.9,pack:14.9,combo:19.9}[product];
+      const value={guia:4.9,pack:7.9,combo:10.9}[product];
       if(typeof gtag==='function')gtag('event','store_buy_click',{currency:'BRL',value,item_name:STORE_PRODUCTS[product].name,product_id:product});
       const old=btn.textContent;
       btn.disabled=true;
@@ -54,7 +54,7 @@ async function confirmStorePayment(){
       if(d.verified){
         saveReceipt(product,payload);
         if(product==='combo')localStorage.setItem('FZ_PRO_UNTIL',String(Date.now()+30*864e5));
-        const value={guia:9.9,pack:14.9,combo:19.9}[product];
+        const value={guia:4.9,pack:7.9,combo:10.9}[product];
         if(typeof gtag==='function')gtag('event','purchase',{transaction_id:payload.order_nsu,currency:'BRL',value,items:[{item_id:product,item_name:STORE_PRODUCTS[product].name,price:value,quantity:1}]});
         const target=product==='guia'?'/produto.html?item=guia':'/produto.html?item=pack';
         const receipt=/^https:\/\//i.test(d.receipt_url||'')?`<a class="text-link" href="${d.receipt_url}" target="_blank" rel="noopener">Ver comprovante</a>`:'';
