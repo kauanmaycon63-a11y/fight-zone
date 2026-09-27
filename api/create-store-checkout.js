@@ -1,7 +1,7 @@
 const PRODUCTS={
-  guia:{price:990,description:'Fight Zone - Guia MMA sem enrolacao'},
-  pack:{price:1490,description:'Fight Zone - Pack Fight Night'},
-  combo:{price:1990,description:'Fight Zone - Combo PRO + Pack Fight Night'}
+  guia:{price:490,description:'Fight Zone - Guia MMA sem enrolacao'},
+  pack:{price:790,description:'Fight Zone - Pack Fight Night'},
+  combo:{price:1090,description:'Fight Zone - Combo PRO + Pack Fight Night'}
 };
 
 module.exports=async(req,res)=>{
