@@ -13,6 +13,8 @@ function initStore(){
     btn.addEventListener('click',async()=>{
       const product=btn.dataset.buy;
       if(!STORE_PRODUCTS[product])return;
+      const value={guia:9.9,pack:14.9,combo:19.9}[product];
+      if(typeof gtag==='function')gtag('event','store_buy_click',{currency:'BRL',value,item_name:STORE_PRODUCTS[product].name,product_id:product});
       const old=btn.textContent;
       btn.disabled=true;
       btn.textContent='Abrindo PIX…';
@@ -20,9 +22,10 @@ function initStore(){
         const r=await fetch('/api/create-store-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product})});
         const d=await r.json();
         if(!r.ok||!d.url)throw new Error('checkout');
-        if(typeof gtag==='function')gtag('event','begin_checkout',{currency:'BRL',value:Number(STORE_PRODUCTS[product].price.replace('R$ ','').replace(',','.')),items:[{item_name:STORE_PRODUCTS[product].name}]});
+        if(typeof gtag==='function')gtag('event','begin_checkout',{currency:'BRL',value,items:[{item_id:product,item_name:STORE_PRODUCTS[product].name,price:value,quantity:1}]});
         location.href=d.url;
       }catch(e){
+        if(typeof gtag==='function')gtag('event','checkout_error',{product_id:product});
         btn.disabled=false;
         btn.textContent=old;
         alert('Não foi possível abrir o checkout agora. Tente novamente em alguns instantes.');
@@ -52,7 +55,7 @@ async function confirmStorePayment(){
         saveReceipt(product,payload);
         if(product==='combo')localStorage.setItem('FZ_PRO_UNTIL',String(Date.now()+30*864e5));
         const value={guia:9.9,pack:14.9,combo:19.9}[product];
-        if(typeof gtag==='function')gtag('event','purchase',{transaction_id:payload.order_nsu,currency:'BRL',value,items:[{item_name:STORE_PRODUCTS[product].name}]});
+        if(typeof gtag==='function')gtag('event','purchase',{transaction_id:payload.order_nsu,currency:'BRL',value,items:[{item_id:product,item_name:STORE_PRODUCTS[product].name,price:value,quantity:1}]});
         const target=product==='guia'?'/produto.html?item=guia':'/produto.html?item=pack';
         const receipt=/^https:\/\//i.test(d.receipt_url||'')?`<a class="text-link" href="${d.receipt_url}" target="_blank" rel="noopener">Ver comprovante</a>`:'';
         el.innerHTML=`<div class="store-status success"><div class="status-icon">✓</div><span class="kicker">PAGAMENTO CONFIRMADO</span><h1>Compra liberada!</h1><p>${STORE_PRODUCTS[product].name} já está disponível neste dispositivo.</p><div class="store-actions"><a class="btn" href="${target}">Acessar agora</a><a class="btn ghost" href="/loja.html">Voltar à loja</a>${receipt}</div></div>`;
