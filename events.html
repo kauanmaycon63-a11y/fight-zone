@@ -1,38 +1,20 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cards completos UFC | Fight Zone</title><meta name="description" content="Cards completos do UFC separados em card principal, preliminares e preliminares iniciais, com fotos e estatísticas dos lutadores."><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/image-fix.css"><script src="/analytics.js"></script></head><body><header class="top"><div class="wrap nav"></div></header><main><section><div class="wrap"><span class="kicker">EVENTOS</span><h1>Cards completos do UFC</h1><p class="muted">Card principal e preliminares completos. Clique em qualquer luta para comparar as estatísticas dos dois lutadores.</p><div id="full-events"></div></div></section></main><script src="/app.js"></script><script>
-const EVENTS=[
-{title:'UFC Fight Night · Rosas Jr. vs Barcelos',date:'26 set. 2026 · Meta APEX · Las Vegas',event:'UFC Fight Night',sections:[
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cards completos UFC | Fight Zone</title><meta name="description" content="Próximo card completo do UFC com horários, lutas e comparação de estatísticas dos atletas."><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/image-fix.css"><script src="/analytics.js"></script></head><body><header class="top"><div class="wrap nav"></div></header><main><section><div class="wrap"><span class="kicker">PRÓXIMO EVENTO</span><h1>UFC 332 · Natalia Silva vs Wang Cong</h1><p class="muted">3 de outubro de 2026 · Delta Center · Salt Lake City. Preliminares às 17h e card principal às 21h, horário de Brasília.</p><div id="full-events"></div></div></section></main><script src="/app.js"></script><script>
+const EVENTS=[{title:'UFC 332 · Silva vs Wang',date:'03 out. 2026 · Delta Center · Salt Lake City',event:'UFC 332',sections:[
 {name:'CARD PRINCIPAL',count:'5 LUTAS',fights:[
-['EVENTO PRINCIPAL','Peso-galo','Raul Rosas Jr.','raul-rosas-jr','Raoni Barcelos','raoni-barcelos'],
-['CO-EVENTO PRINCIPAL','Peso-galo feminino','Norma Dumont','norma-dumont','Ailin Perez','ailin-perez'],
-['CARD PRINCIPAL','Meio-pesado','Luis Hernandez','luis-hernandez','Sedriques Dumas','sedriques-dumas'],
-['FINAL TUF','Peso-galo','Mahammadali Osmanli','mahammadali-osmanli','Ilimbek Akylbek','ilimbek-akylbek'],
-['FINAL TUF','Peso-palha feminino','Melissa Amaya','melissa-amaya','Tina Black','tina-black']]},
-{name:'PRELIMINARES',count:'7 LUTAS',fights:[
-['PRELIMINAR','Peso-galo','Brady Hiestand','brady-hiestand','Rinya Nakamura','rinya-nakamura'],
-['PRELIMINAR','Peso-médio','Rodolfo Vieira','rodolfo-vieira','Robert Bryczek','robert-bryczek'],
-['PRELIMINAR','Meio-pesado','Rodolfo Bellato','rodolfo-bellato','Christian Edwards','christian-edwards'],
-['PRELIMINAR','Peso-leve','Elves Brener','elves-brener','Josiah Harrell','josiah-harrell'],
-['PRELIMINAR','Peso-galo','Montel Jackson','montel-jackson','Ricky Simon','ricky-simon'],
-['PRELIMINAR','Peso-galo','John Castaneda','john-castaneda','Alatengheili','alatengheili'],
-['PRELIMINAR','Peso-palha feminino','Vanessa Demopoulos','vanessa-demopoulos','Yazmin Jauregui','yazmin-jauregui']]}]},
-{title:'UFC 332 · Silva vs Wang',date:'03 out. 2026 · Delta Center · Salt Lake City',event:'UFC 332',sections:[
-{name:'CARD PRINCIPAL',count:'5 LUTAS',fights:[
-['DISPUTA DE TÍTULO','Peso-mosca feminino','Natalia Silva','natalia-silva','Wang Cong','wang-cong'],
+['DISPUTA DE CINTURÃO','Peso-mosca feminino','Natalia Silva','natalia-silva','Wang Cong','wang-cong'],
 ['CO-EVENTO PRINCIPAL','Peso-galo','Deiveson Figueiredo','deiveson-figueiredo','Payton Talbott','payton-talbott'],
 ['CARD PRINCIPAL','Peso-leve','King Green','king-green','Esteban Ribovics','esteban-ribovics'],
 ['CARD PRINCIPAL','Peso-meio-médio','Roberto Soldic','roberto-soldic','Khaos Williams','khaos-williams'],
 ['CARD PRINCIPAL','Peso-médio','Ateba Gautier','ateba-gautier','Roman Kopylov','roman-kopylov']]},
-{name:'PRELIMINARES',count:'4 LUTAS',fights:[
+{name:'PRELIMINARES',count:'7 LUTAS',fights:[
 ['PRELIMINAR','Peso-mosca','Imanol Rodriguez','imanol-rodriguez','Alden Coria','alden-coria'],
 ['PRELIMINAR','Peso-médio','Damian Pinas','damian-pinas','Andrey Pulyaev','andrey-pulyaev'],
-['PRELIMINAR','Peso-galo','Marcus McGhee','marcus-mcghee','Benardo Sopaj','benardo-sopaj'],
-['PRELIMINAR','Peso-pesado','Anthony Wint','anthony-wint','Lucas Armand','lucas-armand']]},
-{name:'PRELIMINARES INICIAIS',count:'4 LUTAS',fights:[
-['PRELIMINAR INICIAL','Peso-pesado','Johnny Walker','johnny-walker','Mick Parkin','mick-parkin'],
-['PRELIMINAR INICIAL','Peso-leve','Rafael dos Anjos','rafael-dos-anjos','Alexander Hernandez','alexander-hernandez'],
-['PRELIMINAR INICIAL','Peso-médio','Marvin Vettori','marvin-vettori','Ismail Naurdiev','ismail-naurdiev'],
-['PRELIMINAR INICIAL','Peso-meio-médio','Court McGee','court-mcgee','Eric Nolan','eric-nolan']]}]}];
+['PRELIMINAR','Peso-galo','Marcus McGhee','marcus-mcghee','Bernardo Sopaj','bernardo-sopaj'],
+['PRELIMINAR','Peso-pesado','Johnny Walker','johnny-walker','Mick Parkin','mick-parkin'],
+['PRELIMINAR','Peso-meio-médio','Rafael dos Anjos','rafael-dos-anjos','Alexander Hernandez','alexander-hernandez'],
+['PRELIMINAR','Peso-médio','Marvin Vettori','marvin-vettori','Ismail Naurdiev','ismail-naurdiev'],
+['PRELIMINAR','Peso-meio-médio','Court McGee','court-mcgee','Eric Nolan','eric-nolan']]}]}];
 const qs=o=>new URLSearchParams(o).toString();
 const card=(event,f)=>{const[label,division,n1,s1,n2,s2]=f;const href='/fight-card.html?'+qs({event,division,title:n1+' vs '+n2,s1,n1,s2,n2});return `<a class="event-card" href="${href}"><div class="event-faces"><img src="/api/fighter-image?slug=${s1}" alt="${n1}"><img src="/api/fighter-image?slug=${s2}" alt="${n2}"></div><b>${label}</b><h3>${n1} <span class="vs-text">vs</span> ${n2}</h3><p>${division}</p><span>VER ESTATÍSTICAS</span></a>`};
-document.getElementById('full-events').innerHTML=EVENTS.map((e,i)=>`<article class="full-event ${i?'event-next':''}"><div class="section-head"><div><h2>${e.title}</h2><p class="muted">${e.date}</p></div><strong>${e.sections.reduce((n,s)=>n+s.fights.length,0)} LUTAS</strong></div>${e.sections.map(s=>`<div class="fight-block"><div class="fight-section-head"><h3>${s.name}</h3><span>${s.count}</span></div><div class="event-grid big fight-card-grid">${s.fights.map(f=>card(e.event,f)).join('')}</div></div>`).join('')}</article>`).join('');
+document.getElementById('full-events').innerHTML=EVENTS.map((e,i)=>`<article class="full-event"><div class="section-head"><div><h2>${e.title}</h2><p class="muted">${e.date}</p></div><strong>${e.sections.reduce((n,s)=>n+s.fights.length,0)} LUTAS</strong></div>${e.sections.map(s=>`<div class="fight-block"><div class="fight-section-head"><h3>${s.name}</h3><span>${s.count}</span></div><div class="event-grid big fight-card-grid">${s.fights.map(f=>card(e.event,f)).join('')}</div></div>`).join('')}</article>`).join('');
 </script></body></html>
