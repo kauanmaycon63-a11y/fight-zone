@@ -8,12 +8,19 @@ function getReceipts(){try{return JSON.parse(localStorage.getItem('FZ_STORE_RECE
 function saveReceipt(product,payload){const r=getReceipts();r[product]=payload;localStorage.setItem('FZ_STORE_RECEIPTS',JSON.stringify(r))}
 function inferProduct(order){const m=String(order||'').match(/^fzstore-(guia|pack|combo)-/);return m?.[1]||''}
 
+function trackServerClick(product){
+  try{
+    fetch('/api/store-click',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product,source:'loja'}),keepalive:true}).catch(()=>{});
+  }catch(e){}
+}
+
 function initStore(){
   document.querySelectorAll('[data-buy]').forEach(btn=>{
     btn.addEventListener('click',async()=>{
       const product=btn.dataset.buy;
       if(!STORE_PRODUCTS[product])return;
       const value={guia:4.9,pack:7.9,combo:10.9}[product];
+      trackServerClick(product);
       if(typeof gtag==='function')gtag('event','store_buy_click',{currency:'BRL',value,item_name:STORE_PRODUCTS[product].name,product_id:product});
       const old=btn.textContent;
       btn.disabled=true;
